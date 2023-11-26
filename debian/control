@@ -1,0 +1,27 @@
+Source: qt6-screencopy
+Section: libs
+Maintainer: Erik Inkinen <erik.inkinen@erikinkinen.fi>
+Priority: optional
+Build-Depends: pkg-kde-tools,
+               cmake,
+               qt6-base-dev,
+               qt6-base-private-dev,
+               qt6-wayland-dev,
+               qt6-wayland-private-dev,
+               qt6-wayland,
+               pkg-config,
+Standards-Version: 4.5.1
+
+Package: qt6-screencopy
+Architecture: any
+Multi-Arch: foreign
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: This package contains a Qt wrapper for wlr_screencopy_unstable_v1 Wayland protocol.
+
+Package: qt6-screencopy-dev
+Architecture: any
+Multi-Arch: foreign
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${misc:Depends}, ${shlibs:Depends}, qt6-output-power-management (= ${binary:Version})
+Description: This package contains a Qt wrapper for wlr_screencopy_unstable_v1 Wayland protocol. (Development headers)
