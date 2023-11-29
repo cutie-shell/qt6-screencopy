@@ -23,5 +23,5 @@ Package: qt6-screencopy-dev
 Architecture: any
 Multi-Arch: foreign
 Pre-Depends: ${misc:Pre-Depends}
-Depends: ${misc:Depends}, ${shlibs:Depends}, qt6-output-power-management (= ${binary:Version})
+Depends: ${misc:Depends}, ${shlibs:Depends}, qt6-screencopy (= ${binary:Version})
 Description: This package contains a Qt wrapper for wlr_screencopy_unstable_v1 Wayland protocol. (Development headers)
