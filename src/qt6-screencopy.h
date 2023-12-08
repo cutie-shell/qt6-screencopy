@@ -29,6 +29,7 @@ public:
 	ScreencopyFrameV1(void *object);
 
 signals:
+	void failed();
 	void ready(QImage image);
 
 private:

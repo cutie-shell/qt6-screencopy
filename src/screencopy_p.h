@@ -41,10 +41,14 @@ public:
 
 protected:
 	void zwlr_screencopy_frame_v1_buffer(uint32_t format, uint32_t width, uint32_t height, uint32_t stride) override;
+	void zwlr_screencopy_frame_v1_buffer_done() override;
     void zwlr_screencopy_frame_v1_ready(uint32_t tv_sec_hi, uint32_t tv_sec_lo, uint32_t tv_nsec) override;
 
 	struct wl_buffer *m_buffer;
 	QSize m_bufferDimensions;
+	uint32_t m_bufferFormat;
+	uint32_t m_bufferStride;
+	bool m_formatGiven = false;
 	size_t m_bufferSize;
 	uchar *m_bufferData;
 

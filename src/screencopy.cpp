@@ -32,9 +32,24 @@ ScreencopyFrameV1Private::ScreencopyFrameV1Private(
 ScreencopyFrameV1Private::~ScreencopyFrameV1Private() {}
 
 void ScreencopyFrameV1Private::zwlr_screencopy_frame_v1_buffer(uint32_t format, uint32_t width, uint32_t height, uint32_t stride) {
+	if (m_formatGiven) return;
 	m_bufferDimensions = QSize(width, height);
-	create_wl_buffer(0, stride);
-	copy(m_buffer);
+	m_bufferFormat = format;
+	m_bufferStride = stride;
+	m_formatGiven = true;
+}
+
+void ScreencopyFrameV1Private::zwlr_screencopy_frame_v1_buffer_done() {
+	Q_Q(ScreencopyFrameV1);
+	if (m_formatGiven) {
+		create_wl_buffer(m_bufferFormat, m_bufferStride);
+		copy(m_buffer);
+	} else {
+		emit q->failed();
+		destroy();
+		delete q;
+		delete this;
+	}
 }
 
 void ScreencopyFrameV1Private::zwlr_screencopy_frame_v1_ready(uint32_t tv_sec_hi, uint32_t tv_sec_lo, uint32_t tv_nsec) {
