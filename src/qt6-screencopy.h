@@ -29,7 +29,7 @@ public:
 	ScreencopyFrameV1(void *object);
 
 signals:
-	void ready(QImage *image);
+	void ready(QImage image);
 
 private:
 	ScreencopyFrameV1Private *d_ptr;

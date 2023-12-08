@@ -43,9 +43,13 @@ protected:
 	void zwlr_screencopy_frame_v1_buffer(uint32_t format, uint32_t width, uint32_t height, uint32_t stride) override;
     void zwlr_screencopy_frame_v1_ready(uint32_t tv_sec_hi, uint32_t tv_sec_lo, uint32_t tv_nsec) override;
 
-	QImage m_image;
-	QtWaylandClient::QWaylandShmBuffer *m_shmBuffer;
+	struct wl_buffer *m_buffer;
+	QSize m_bufferDimensions;
+	size_t m_bufferSize;
+	uchar *m_bufferData;
 
 private:
 	ScreencopyFrameV1 *q_ptr;
+	int m_fd;
+	void create_wl_buffer(uint32_t format, uint32_t stride);
 };
