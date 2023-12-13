@@ -54,6 +54,5 @@ protected:
 
 private:
 	ScreencopyFrameV1 *q_ptr;
-	int m_fd;
 	void create_wl_buffer(uint32_t format, uint32_t stride);
 };

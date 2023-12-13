@@ -59,7 +59,7 @@ void ScreencopyFrameV1Private::zwlr_screencopy_frame_v1_ready(uint32_t tv_sec_hi
 	);
 	destroy();
 	munmap(m_bufferData, m_bufferSize);
-	close(m_fd);
+	wl_buffer_destroy(m_buffer);
 	delete q;
 	delete this;
 }
@@ -84,5 +84,6 @@ void ScreencopyFrameV1Private::create_wl_buffer(uint32_t format, uint32_t stride
     struct wl_shm_pool *pool = wl_shm_create_pool(integration()->display()->shm()->object(), m_fd, m_bufferSize);
     m_buffer = wl_shm_pool_create_buffer(pool, 0, m_bufferDimensions.width(), m_bufferDimensions.height(),
         stride, format);
+    close(m_fd);
     wl_shm_pool_destroy(pool);
 }
