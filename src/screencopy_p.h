@@ -13,36 +13,38 @@
 #include "qwayland-wlr-screencopy-unstable-v1.h"
 
 class ScreencopyManagerV1Private
-	: public QWaylandClientExtensionTemplate<ScreencopyManagerV1Private>
-	, public QtWayland::zwlr_screencopy_manager_v1 {
+	: public QWaylandClientExtensionTemplate<ScreencopyManagerV1Private>,
+	  public QtWayland::zwlr_screencopy_manager_v1 {
 	Q_OBJECT
 	Q_DECLARE_PUBLIC(ScreencopyManagerV1)
-public:
+    public:
 	ScreencopyManagerV1Private(ScreencopyManagerV1 *q);
 
-protected:
+    protected:
+    private slots:
 
-private slots:
-
-private:
+    private:
 	ScreencopyManagerV1 *q_ptr;
 };
 
 class ScreencopyFrameV1Private
-	: public QWaylandClientExtensionTemplate<ScreencopyFrameV1Private>
-	, public QtWayland::zwlr_screencopy_frame_v1 {
+	: public QWaylandClientExtensionTemplate<ScreencopyFrameV1Private>,
+	  public QtWayland::zwlr_screencopy_frame_v1 {
 	Q_OBJECT
 	Q_DECLARE_PUBLIC(ScreencopyFrameV1)
-public:
-	ScreencopyFrameV1Private(
-		ScreencopyFrameV1 *q,
-		struct ::zwlr_screencopy_frame_v1 *object);
+    public:
+	ScreencopyFrameV1Private(ScreencopyFrameV1 *q,
+				 struct ::zwlr_screencopy_frame_v1 *object);
 	~ScreencopyFrameV1Private();
 
-protected:
-	void zwlr_screencopy_frame_v1_buffer(uint32_t format, uint32_t width, uint32_t height, uint32_t stride) override;
+    protected:
+	void zwlr_screencopy_frame_v1_buffer(uint32_t format, uint32_t width,
+					     uint32_t height,
+					     uint32_t stride) override;
 	void zwlr_screencopy_frame_v1_buffer_done() override;
-    void zwlr_screencopy_frame_v1_ready(uint32_t tv_sec_hi, uint32_t tv_sec_lo, uint32_t tv_nsec) override;
+	void zwlr_screencopy_frame_v1_ready(uint32_t tv_sec_hi,
+					    uint32_t tv_sec_lo,
+					    uint32_t tv_nsec) override;
 
 	struct wl_buffer *m_buffer;
 	QSize m_bufferDimensions;
@@ -52,7 +54,7 @@ protected:
 	size_t m_bufferSize;
 	uchar *m_bufferData;
 
-private:
+    private:
 	ScreencopyFrameV1 *q_ptr;
 	void create_wl_buffer(uint32_t format, uint32_t stride);
 };

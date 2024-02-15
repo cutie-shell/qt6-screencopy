@@ -6,32 +6,30 @@ class ScreencopyManagerV1Private;
 class ScreencopyFrameV1Private;
 class ScreencopyFrameV1;
 
-class Q_WAYLANDCLIENT_EXPORT ScreencopyManagerV1 
-	: public QObject {
+class Q_WAYLANDCLIENT_EXPORT ScreencopyManagerV1 : public QObject {
 	Q_OBJECT
 	Q_DECLARE_PRIVATE(ScreencopyManagerV1)
-public:
+    public:
 	ScreencopyManagerV1();
 
 	ScreencopyFrameV1 *capture();
 
-signals:
+    signals:
 
-private:
+    private:
 	ScreencopyManagerV1Private *d_ptr;
 };
 
-class Q_WAYLANDCLIENT_EXPORT ScreencopyFrameV1 
-	: public QObject {
+class Q_WAYLANDCLIENT_EXPORT ScreencopyFrameV1 : public QObject {
 	Q_OBJECT
 	Q_DECLARE_PRIVATE(ScreencopyFrameV1)
-public:
+    public:
 	ScreencopyFrameV1(void *object);
 
-signals:
+    signals:
 	void failed();
 	void ready(QImage image);
 
-private:
+    private:
 	ScreencopyFrameV1Private *d_ptr;
 };
