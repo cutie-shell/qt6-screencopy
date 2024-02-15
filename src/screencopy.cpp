@@ -76,7 +76,7 @@ void ScreencopyFrameV1Private::zwlr_screencopy_frame_v1_ready(
 			     m_bufferDimensions.height(),
 			     m_bufferDimensions.width() * 4,
 			     QImage::Format_ARGB32_Premultiplied)
-			      .rgbSwapped());
+			      .copy());
 	destroy();
 	munmap(m_bufferData, m_bufferSize);
 	wl_buffer_destroy(m_buffer);
